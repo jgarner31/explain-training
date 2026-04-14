@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Grace">
+<title>Grace</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  html, body {
+    width: 100%; height: 100%;
+    background: #0a0a0f;
+    font-family: Georgia, 'Times New Roman', serif;
+    overflow: hidden;
+    touch-action: manipulation;
+  }
+
+  .screen {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 24px 20px 20px;
+    gap: 16px;
+  }
+
+  .header {
+    text-align: center;
+    color: #c8c0a8;
+    font-size: clamp(18px, 3vw, 26px);
+    font-weight: normal;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #2a2a3a;
+    flex-shrink: 0;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 16px;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .contact {
+    background: #13131e;
+    border: 2px solid #2a2a3a;
+    border-radius: 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.12s ease, background 0.12s ease, border-color 0.12s ease;
+  }
+
+  .contact::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .contact:active {
+    transform: scale(0.96);
+    background: #1a1a2e;
+    border-color: #5a7ab5;
+  }
+
+  .contact.pat     { border-color: #3a4a6a; }
+  .contact.john    { border-color: #3a5a4a; }
+  .contact.steven  { border-color: #5a4a3a; }
+  .contact.lenny   { border-color: #5a3a5a; }
+
+  .contact.pat:active    { border-color: #7a9ad5; background: #111828; }
+  .contact.john:active   { border-color: #7ab59a; background: #111a18; }
+  .contact.steven:active { border-color: #d5aa7a; background: #1a1510; }
+  .contact.lenny:active  { border-color: #c57ac5; background: #180e18; }
+
+  .avatar {
+    width: clamp(64px, 12vw, 100px);
+    height: clamp(64px, 12vw, 100px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(26px, 5vw, 42px);
+    font-weight: normal;
+    letter-spacing: -0.02em;
+    flex-shrink: 0;
+  }
+
+  .pat    .avatar { background: #1e2a40; color: #8aabdc; border: 2px solid #3a4a6a; }
+  .john   .avatar { background: #1a2e22; color: #7abf96; border: 2px solid #3a5a4a; }
+  .steven .avatar { background: #2e2218; color: #d4a86a; border: 2px solid #5a4a3a; }
+  .lenny  .avatar { background: #2a1a2e; color: #c47ac4; border: 2px solid #5a3a5a; }
+
+  .name {
+    color: #e8e0d0;
+    font-size: clamp(22px, 4.5vw, 40px);
+    font-weight: normal;
+    letter-spacing: 0.04em;
+    text-align: center;
+    line-height: 1;
+  }
+
+  .phone-hint {
+    color: #4a4a5a;
+    font-size: clamp(11px, 1.8vw, 15px);
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.06em;
+    text-align: center;
+  }
+
+  /* Calling overlay */
+  .overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: #06060d;
+    z-index: 100;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+  }
+  .overlay.show { display: flex; }
+
+  .overlay-ring {
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    border: 3px solid #3a4a7a;
+    display: flex; align-items: center; justify-content: center;
+    animation: pulse 1.4s ease-in-out infinite;
+  }
+  .overlay-ring-inner {
+    width: 86px; height: 86px;
+    border-radius: 50%;
+    background: #1a2040;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 36px;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(90,120,180,0.4); }
+    50% { box-shadow: 0 0 0 20px rgba(90,120,180,0); }
+  }
+
+  .overlay-label { color: #6a6a7a; font-size: 16px; letter-spacing: 0.2em; text-transform: uppercase; font-family: Georgia, serif; }
+  .overlay-name  { color: #e8e0d0; font-size: clamp(32px, 6vw, 52px); font-family: Georgia, serif; letter-spacing: 0.04em; }
+
+  .end-btn {
+    margin-top: 20px;
+    background: #8b1a1a;
+    border: none;
+    border-radius: 50px;
+    color: #f0d0d0;
+    font-size: 18px;
+    font-family: Georgia, serif;
+    letter-spacing: 0.08em;
+    padding: 18px 48px;
+    cursor: pointer;
+    transition: background 0.1s;
+  }
+  .end-btn:active { background: #6a1010; transform: scale(0.97); }
+</style>
+</head>
+<body>
+
+<div class="screen">
+  <div class="header">Grace's Phone</div>
+  <div class="grid">
+
+    <a class="contact pat" href="tel:15614901332">
+      <div class="avatar">P</div>
+      <div class="name">Pat</div>
+      <div class="phone-hint">(561) 490-1332</div>
+    </a>
+
+    <a class="contact john" href="tel:16188890943">
+      <div class="avatar">J</div>
+      <div class="name">John</div>
+      <div class="phone-hint">(618) 889-0943</div>
+    </a>
+
+    <a class="contact steven" href="tel:16187131536">
+      <div class="avatar">S</div>
+      <div class="name">Steven</div>
+      <div class="phone-hint">(618) 713-1536</div>
+    </a>
+
+    <a class="contact lenny" href="tel:15617476025">
+      <div class="avatar">L</div>
+      <div class="name">Lenny</div>
+      <div class="phone-hint">(561) 747-6025</div>
+    </a>
+
+  </div>
+</div>
+
+</body>
+</html>
