@@ -8,3 +8,10 @@ local.properties
 # Keep release artifacts intentionally if you want to distribute them from the repo.
 # Remove this ignore if you want all APK outputs tracked automatically.
 app/release/output-metadata.json
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example

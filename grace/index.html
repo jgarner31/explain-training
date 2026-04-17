@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Grace Dialer">
+<title>Grace Dialer</title>
+<style>
+:root {
+  --panel: rgba(7, 15, 34, 0.82);
+  --panel-border: rgba(61, 118, 255, 0.72);
+  --text: #f4f7ff;
+  --muted: #b7c3e8;
+  --accent: #2d67ff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  min-height: 100%;
+  background:
+    radial-gradient(circle at top left, rgba(34, 93, 255, 0.24), transparent 34%),
+    radial-gradient(circle at bottom right, rgba(11, 34, 96, 0.54), transparent 40%),
+    linear-gradient(180deg, #040404 0%, #071126 100%);
+  color: var(--text);
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  padding: 28px 18px 48px;
+}
+
+.page {
+  width: min(920px, 100%);
+}
+
+.hero {
+  border: 2px solid var(--panel-border);
+  border-radius: 36px;
+  background: var(--panel);
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.42);
+  padding: 36px 28px 28px;
+}
+
+.eyebrow {
+  text-align: center;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.42em;
+  font-size: 13px;
+  margin-bottom: 18px;
+}
+
+h1 {
+  text-align: center;
+  font-size: clamp(40px, 7vw, 74px);
+  color: white;
+  letter-spacing: 0.08em;
+  line-height: 0.95;
+}
+
+.subhead {
+  max-width: 720px;
+  margin: 18px auto 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: clamp(18px, 2.7vw, 26px);
+  line-height: 1.4;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 240px;
+  min-height: 76px;
+  padding: 18px 28px;
+  border-radius: 24px;
+  text-decoration: none;
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: bold;
+  letter-spacing: 0.04em;
+}
+
+.button-primary {
+  background: var(--accent);
+  color: white;
+  box-shadow: inset 0 -6px 0 rgba(0, 0, 0, 0.18);
+}
+
+.button-secondary {
+  border: 2px solid var(--panel-border);
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.details {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.detail-card {
+  border-radius: 24px;
+  border: 1px solid rgba(114, 149, 255, 0.28);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 18px 16px;
+}
+
+.detail-label {
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.detail-value {
+  color: white;
+  font-size: clamp(20px, 3vw, 28px);
+  line-height: 1.2;
+}
+
+.notes {
+  margin-top: 28px;
+  border-top: 1px solid rgba(114, 149, 255, 0.3);
+  padding-top: 22px;
+}
+
+.notes p {
+  color: var(--muted);
+  font-size: clamp(16px, 2.2vw, 20px);
+  line-height: 1.55;
+  text-align: center;
+}
+
+.notes strong {
+  color: white;
+}
+
+code {
+  font-family: "Courier New", monospace;
+  font-size: 0.9em;
+}
+
+@media (max-width: 760px) {
+  body {
+    padding: 18px 12px 28px;
+  }
+
+  .hero {
+    padding: 24px 18px 22px;
+    border-radius: 26px;
+  }
+
+  .details {
+    grid-template-columns: 1fr;
+  }
+
+  .button {
+    width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <section class="hero">
+    <div class="eyebrow">Explain Training</div>
+    <h1>Grace Dialer</h1>
+    <p class="subhead">
+      Simple locked-down Android dialer for Grace's Lenovo tablet.
+      Install the APK below to get the large 6-contact calling screen.
+    </p>
+
+    <div class="actions">
+      <a class="button button-primary" href="https://github.com/jgarner31/explain-training/raw/main/grace/app-release.apk">
+        Download APK
+      </a>
+      <a class="button button-secondary" href="https://github.com/jgarner31/explain-training/tree/main/grace">
+        View Repo Folder
+      </a>
+    </div>
+
+    <div class="details">
+      <div class="detail-card">
+        <div class="detail-label">Platform</div>
+        <div class="detail-value">Android tablet</div>
+      </div>
+      <div class="detail-card">
+        <div class="detail-label">Dialing</div>
+        <div class="detail-value">Zoiper handoff</div>
+      </div>
+      <div class="detail-card">
+        <div class="detail-label">Install File</div>
+        <div class="detail-value"><code>app-release.apk</code></div>
+      </div>
+    </div>
+
+    <div class="notes">
+      <p>
+        After installing, open <strong>Grace Dialer</strong>, allow contacts access once,
+        make sure Zoiper is the default dialer, and then pin the app for daily use.
+      </p>
+    </div>
+  </section>
+</div>
+</body>
+</html>
