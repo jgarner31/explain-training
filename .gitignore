@@ -1,0 +1,10 @@
+.gradle/
+.idea/
+build/
+app/build/
+local.properties
+.DS_Store
+
+# Keep release artifacts intentionally if you want to distribute them from the repo.
+# Remove this ignore if you want all APK outputs tracked automatically.
+app/release/output-metadata.json
